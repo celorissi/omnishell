@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  omnishell:
+    build: .
+    container_name: omnishell
+    restart: unless-stopped
+    network_mode: "host"
+    volumes:
+      - .:/app

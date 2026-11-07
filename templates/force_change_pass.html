@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Alteração Obrigatória de Senha — OmniShell</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="icon" type="image/png" sizes="512x512" href="{{ url_for('static', filename='favicon.png') }}">
+  <style>
+    body {
+      background-color: #0b0f19 !important;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      color: #e2e8f0 !important;
+    }
+    .card-login {
+      background-color: #131b2e !important;
+      border: 1px solid #243252 !important;
+      border-radius: 12px !important;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      padding: 35px;
+      width: 440px;
+      text-align: center;
+    }
+    .brand-logo {
+      width: 150px;
+      margin-bottom: 15px;
+      object-fit: contain;
+    }
+    h1 {
+      font-size: 22px;
+      color: #f4f4f5;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+    p.subtitle {
+      color: #94a3b8;
+      font-size: 13px;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      font-size: 14px;
+      background-color: #1a243b !important;
+      border: 1px solid #243252 !important;
+      color: #f4f4f5 !important;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      outline: none;
+    }
+    .form-control::placeholder {
+      color: #64748b;
+      opacity: 1;
+    }
+    .form-control:focus {
+      border-color: #00b4d8 !important;
+      box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.2) !important;
+      color: #f4f4f5 !important;
+    }
+    .button {
+      width: 100%;
+      padding: 14px 15px;
+      font-size: 14px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #0d8abc 0%, #005f73 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(13, 138, 188, 0.3);
+      cursor: pointer;
+      transition: all 0.25s ease-in-out;
+    }
+    .button:hover {
+      background: linear-gradient(135deg, #00b4d8 0%, #0d8abc 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(13, 138, 188, 0.45);
+    }
+    .alert {
+      color: #fca5a5;
+      background-color: rgba(127, 29, 29, 0.3);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card-login">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="brand-logo" onerror="this.style.display='none'" />
+    <h1>Alteração Obrigatória</h1>
+    <p class="subtitle">Por motivos de segurança, por favor defina uma nova palavra-passe definitiva para a sua conta de administrador.</p>
+
+    {% if error %}
+      <div class="alert">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" action="/force_change_password">
+      <input type="password" name="new_password" class="form-control" placeholder="Nova Palavra-passe Definitiva" required autofocus />
+      <button type="submit" class="button">Atualizar e Entrar</button>
+    </form>
+  </div>
+</body>
+</html>
