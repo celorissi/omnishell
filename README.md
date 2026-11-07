@@ -5,6 +5,10 @@
 ![OmniShell Preview](https://img.shields.io/badge/Status-Active-success) ![Python](https://img.shields.io/badge/Python-3.11%2B-blue) ![Docker](https://img.shields.io/badge/Docker-Ready-informational)
 
 ---
+<p align="center">
+  <img src="assets/omnishell-logo.png" alt="OmniShell Logo" width="100%">
+</p>
+
 
 ## 🚀 Funcionalidades
 
@@ -70,3 +74,20 @@ Este projeto é de uso livre para fins educacionais, de laboratório e gestão d
 Basta criar o ficheiro `README.md` na raiz da pasta do projeto com este conteúdo, ajustar o URL do seu repositório no comando de `git clone` e fazer o commit e push para o GitHub!
 
 
+---
+## 📸 Capturas de Ecrã
+
+### 1. Tela de Login
+<p align="center">
+  <img src="assets/omnishell-tela-inicial.png" alt="Tela de Login do OmniShell" width="100%">
+</p>
+
+### 2. Tela de Conexões
+<p align="center">
+  <img src="assets/omnishell-tela-conexoes.png" alt="Tela de Conexões do OmniShell" width="100%">
+</p>
+
+### 3. Conexão SSH Ativa (Exemplo)
+<p align="center">
+  <img src="assets/omnishell-tela-conexao-ativa.png" alt="Sessão SSH Ativa no OmniShell" width="100%">
+</p>
