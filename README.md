@@ -34,11 +34,15 @@ A forma mais rápida de colocar o OmniShell a funcionar é utilizando o Docker C
 
 ### 1.1 - Subir o contentor com o Docker Compose:
 
-Bash
+```Bash
 docker compose up -d --build
-Aceder à aplicação:
-Abra o seu browser e acedite a:http://<IP-DO-SERVIDOR>:8513
+```
 
+Aceder à aplicação:
+Abra o seu browser conforme abaixo:
+```
+http://<IP-DO-SERVIDOR>:8513
+```
 ### 1.2 - Credenciais Padrão (Primeiro Acesso):
 
 Utilizador: admin
