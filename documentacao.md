@@ -8,7 +8,7 @@ O **Portal SSH Jumper** é uma aplicação corporativa robusta desenvolvida em *
 ## 2. Funcionalidades Principais
 
 * **Autenticação Segura & Isolada:** Contas de utilizador protegidas por hash de palavra-passe (`Werkzeug`), com inventários de dispositivos individuais salvos em ficheiros `.xlsx`.
-* **Painel de Administração Global (`suptelecom`):** Permite listar utilizadores, redefinir credenciais, eliminar contas, monitorizar sessões ativas e forçar desconexões remotas.
+* **Painel de Administração Global (`admin`):** Permite listar utilizadores, redefinir credenciais, eliminar contas, monitorizar sessões ativas e forçar desconexões remotas.
 * **Terminais Simultâneos (Xterm.js):** Suporte a grelhas flexíveis (1 painel, 2 lado a lado ou grelha de 4 painéis).
 * **Buffer Alargado (50.000 Linhas):** Histórico retroativo massivo em qualquer tema visual para auditoria de comandos.
 * **Múltiplos Temas Visuais:** Inclui o verde clássico (`classic`), o autêntico *MobaXterm* (fundo preto absoluto `#000000`), *Matrix*, *Dracula*, *Nord*, entre outros.
@@ -32,7 +32,7 @@ O ficheiro `ssh.py` é o coração da aplicação. Ele gere o servidor HTTP/WebS
 * **Rotas HTTP Protegidas:**
   * `/login` e `/register`: Autenticam e criam novas contas, gerando automaticamente a pasta e o Excel de inventário inicial do utilizador.
   * `/api/user/settings`: Gere e atualiza o tempo limite de ociosidade (`idle_timeout`) personalizado de cada utilizador.
-  * `/api/admin/...`: Rotas restritas exclusivamente à conta `suptelecom` para auditoria de sessões ativas, força de logout e eliminação de utilizadores.
+  * `/api/admin/...`: Rotas restritas exclusivamente à conta `admin` para auditoria de sessões ativas, força de logout e eliminação de utilizadores.
 * **A Classe `SSHBridge` (O Motor SSH):**
   * `connect()`: Estabelece a conexão Paramiko com o alvo e invoca uma shell interativa (`term='xterm'`).
   * `_read_from_ssh()`: Lê continuamente os dados vindos do equipamento de rede e envia-os via Socket.IO para o browser.
