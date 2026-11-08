@@ -1,7 +1,7 @@
 # 📚 Documentação Técnica — OmniShell
 
 > **Versão:** 1.0.0  
-> **Autor / Criador:** [Marcelo Ramiro Rissi / Celorissi]  
+> **Autor / Criador:** Marcelo Ramiro Rissi / celorissi
 > **Arquitetura:** Event-Driven Web SSH Jumper & Infrastructure Manager  
 > **Stack Principal:** Python (Flask / Socket.IO / Paramiko / Eventlet) + Xterm.js + Docker  
 
