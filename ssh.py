@@ -17,12 +17,13 @@ app.config['SECRET_KEY'] = 'nre-ssh-secure-secret-key-2026'
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
 
 USERS_DB = 'users.json'
-USERS_FILE = 'users.json'  # Correção: Declarado explicitamente para a função init_users_file
+USERS_FILE = 'users.json'
 USERS_DIR = 'users'
-ADMIN_USER = 'admin'  # Administrador principal protegido
+RUNBOOKS_DIR = 'runbooks_data'
+ADMIN_USER = 'admin'
 
-if not os.path.exists(USERS_DIR):
-    os.makedirs(USERS_DIR)
+os.makedirs(USERS_DIR, exist_ok=True)
+os.makedirs(RUNBOOKS_DIR, exist_ok=True)
 
 def init_users_file():
     if not os.path.exists(USERS_FILE):
@@ -32,7 +33,7 @@ def init_users_file():
                 "password": initial_password_hash,
                 "approved": True,
                 "active": True,
-                "must_change_password": True,  # Força a alteração no 1º acesso
+                "must_change_password": True,
                 "idle_timeout": 5
             }
         }
@@ -72,6 +73,9 @@ def obter_caminho_excel(username):
         os.makedirs(user_folder)
     return os.path.join(user_folder, f'devices_{username}.xlsx')
 
+def _get_runbook_path(username):
+    return os.path.join(RUNBOOKS_DIR, f"runbooks_{username}.json")
+
 def carregar_arvore_devices(username):
     excel_path = obter_caminho_excel(username)
     if not os.path.exists(excel_path):
@@ -89,7 +93,8 @@ def carregar_arvore_devices(username):
 
     for _, row in df.iterrows():
         cat_path = str(row.get('categoria', 'Geral')).strip()
-        if not cat_path: cat_path = 'Geral'
+        if not cat_path:
+            cat_path = 'Geral'
             
         partes_pasta = [p.strip() for p in cat_path.replace('/', '>').split('>') if p.strip()]
         
@@ -235,6 +240,10 @@ def delete_account():
         user_folder = os.path.join(USERS_DIR, username)
         if os.path.exists(user_folder):
             shutil.rmtree(user_folder)
+
+        rb_path = _get_runbook_path(username)
+        if os.path.exists(rb_path):
+            os.remove(rb_path)
             
         session.pop('username', None)
         return jsonify({'status': 'success', 'redirect': '/login'})
@@ -460,6 +469,10 @@ def api_admin_delete_user():
         user_folder = os.path.join(USERS_DIR, target_user)
         if os.path.exists(user_folder):
             shutil.rmtree(user_folder)
+
+        rb_path = _get_runbook_path(target_user)
+        if os.path.exists(rb_path):
+            os.remove(rb_path)
             
         return jsonify({'status': 'success', 'message': f'Conta de "{target_user}" eliminada com sucesso!'})
     except Exception as e:
@@ -599,6 +612,47 @@ def api_import_devices():
             return jsonify({'status': 'error', 'message': str(e)}), 500
             
     return jsonify({'status': 'error', 'message': 'Apenas ficheiros .xlsx são permitidos.'}), 400
+
+# --- API DE RUNBOOKS / SNIPPETS POR UTILIZADOR ---
+
+@app.route('/api/user/runbooks', methods=['GET'])
+def get_runbooks():
+    if 'username' not in session:
+        return jsonify({'status': 'error', 'message': 'Não autorizado'}), 401
+    
+    username = session['username']
+    path = _get_runbook_path(username)
+    
+    if os.path.exists(path):
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                if isinstance(data, list):
+                    return jsonify(data)
+        except Exception:
+            pass
+    return jsonify([])
+
+@app.route('/api/user/runbooks', methods=['POST'])
+def save_runbooks():
+    if 'username' not in session:
+        return jsonify({'status': 'error', 'message': 'Não autorizado'}), 401
+    
+    username = session['username']
+    path = _get_runbook_path(username)
+    
+    data = request.get_json()
+    if not isinstance(data, list):
+        return jsonify({'status': 'error', 'message': 'Formato inválido, esperado uma lista.'}), 400
+        
+    try:
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=4, ensure_ascii=False)
+        return jsonify({'status': 'success', 'success': True})
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
+
+# --- PONTE SSH & WEBSOCKETS ---
 
 class SSHBridge:
     def __init__(self, sid, tab_id, host, user, password, port=22, session_username=None):
@@ -764,48 +818,6 @@ def handle_disconnect():
         user_sessions[k].close()
         del user_sessions[k]
 
-# Caminho para armazenar os runbooks de cada utilizador (pode criar uma pasta 'data/runbooks' ou na raiz)
-RUNBOOKS_DIR = "runbooks_data"
-os.makedirs(RUNBOOKS_DIR, exist_ok=True)
-
-def _get_runbook_path(username):
-    return os.path.join(RUNBOOKS_DIR, f"runbooks_{username}.json")
-
-@app.route('/api/user/runbooks', methods=['GET'])
-def get_runbooks():
-    if 'username' not in session:
-        return jsonify({"error": "Unauthorized"}), 401
-    
-    username = session['username']
-    path = _get_runbook_path(username)
-    
-    if os.path.exists(path):
-        with open(path, 'r', encoding='utf-8') as f:
-            try:
-                data = json.load(f)
-            except json.JSONDecodeError:
-                data = []
-        return jsonify(data)
-    return jsonify([])
-
-@app.route('/api/user/runbooks', methods=['POST'])
-def save_runbooks():
-    if 'username' not in session:
-        return jsonify({"error": "Unauthorized"}), 401
-    
-    username = session['username']
-    path = _get_runbook_path(username)
-    
-    data = request.json
-    if not isinstance(data, list):
-        return jsonify({"error": "Invalid format, expected list"}), 400
-        
-    with open(path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=4, ensure_ascii=False)
-        
-    return jsonify({"success": True})
-
-
 if __name__ == '__main__':
-    init_users_file()  # Garante a criação do ficheiro users.json com o admin no arranque
+    init_users_file()
     socketio.run(app, host='0.0.0.0', port=8513, debug=True)
