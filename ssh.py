@@ -764,6 +764,48 @@ def handle_disconnect():
         user_sessions[k].close()
         del user_sessions[k]
 
+# Caminho para armazenar os runbooks de cada utilizador (pode criar uma pasta 'data/runbooks' ou na raiz)
+RUNBOOKS_DIR = "runbooks_data"
+os.makedirs(RUNBOOKS_DIR, exist_ok=True)
+
+def _get_runbook_path(username):
+    return os.path.join(RUNBOOKS_DIR, f"runbooks_{username}.json")
+
+@app.route('/api/user/runbooks', methods=['GET'])
+def get_runbooks():
+    if 'username' not in session:
+        return jsonify({"error": "Unauthorized"}), 401
+    
+    username = session['username']
+    path = _get_runbook_path(username)
+    
+    if os.path.exists(path):
+        with open(path, 'r', encoding='utf-8') as f:
+            try:
+                data = json.load(f)
+            except json.JSONDecodeError:
+                data = []
+        return jsonify(data)
+    return jsonify([])
+
+@app.route('/api/user/runbooks', methods=['POST'])
+def save_runbooks():
+    if 'username' not in session:
+        return jsonify({"error": "Unauthorized"}), 401
+    
+    username = session['username']
+    path = _get_runbook_path(username)
+    
+    data = request.json
+    if not isinstance(data, list):
+        return jsonify({"error": "Invalid format, expected list"}), 400
+        
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=4, ensure_ascii=False)
+        
+    return jsonify({"success": True})
+
+
 if __name__ == '__main__':
     init_users_file()  # Garante a criação do ficheiro users.json com o admin no arranque
     socketio.run(app, host='0.0.0.0', port=8513, debug=True)

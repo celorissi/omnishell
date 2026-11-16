@@ -1,0 +1,9 @@
+[
+    {
+        "titulo": "update",
+        "comandos": [
+            "sudo apt update",
+            "sudo apt upgrade"
+        ]
+    }
+]
