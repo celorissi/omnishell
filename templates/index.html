@@ -14,10 +14,10 @@
     body { background-color: #0b0f19; color: #e2e8f0; height: 100vh; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     .app-layout { display: flex; height: 100vh; width: 100vw; overflow: hidden; }
     
-    /* Barra Lateral Esquerda (Dispositivos) */
+    /* Barra Lateral */
     .sidebar { 
-      width: 320px; 
-      min-width: 320px; 
+      width: 340px; 
+      min-width: 340px; 
       background-color: #131b2e; 
       border-right: 1px solid #243252; 
       display: flex; 
@@ -27,7 +27,7 @@
     }
     .sidebar.collapsed { width: 0px !important; min-width: 0px !important; border-right: none; }
     .sidebar-header { padding: 14px 16px; background: #1a243b; border-bottom: 1px solid #243252; font-weight: 600; font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; white-space: nowrap; color: #f4f4f5; }
-    .tree-container { overflow-y: auto; flex: 1; padding: 12px; width: 320px; }
+    .tree-container { overflow-y: auto; flex: 1; padding: 12px; width: 340px; }
     
     /* Pastas e Dispositivos */
     .folder-item { cursor: pointer; padding: 5px 8px; font-weight: 600; font-size: 0.85rem; color: #94a3b8; user-select: none; display: flex; align-items: center; gap: 6px; }
@@ -40,51 +40,17 @@
     .device-info { display: flex; align-items: center; gap: 6px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 
     /* Área de Terminais */
-    .terminal-container { flex: 1; display: flex; flex-direction: column; background-color: #0b0f19; overflow: hidden; min-width: 0; }
+    .terminal-container { flex: 1; display: flex; flex-direction: column; background-color: #0b0f19; overflow: hidden; }
     .terminals-grid { flex: 1; display: grid; grid-template-columns: 1fr; grid-template-rows: 1fr; gap: 6px; background: #070a12; padding: 6px; overflow: hidden; height: 100%; }
-    .terminals-grid.layout-1 .terminal-pane-wrapper { display: none; }
-    .terminals-grid.layout-1 .terminal-pane-wrapper.active { display: flex; }
     .terminals-grid.layout-2 { grid-template-columns: 1fr 1fr; }
     .terminals-grid.layout-4 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
 
-    /* Barra de Abas / Navegação Rápida de Terminais */
-    .terminal-tabs-bar { display: flex; align-items: center; gap: 5px; overflow-x: auto; max-width: 48vw; scrollbar-width: none; }
-    .terminal-tabs-bar::-webkit-scrollbar { display: none; }
-    .term-tab-pill { background: #131b2e; border: 1px solid #243252; color: #94a3b8; font-size: 0.76rem; padding: 3px 10px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: all 0.15s ease; }
-    .term-tab-pill:hover { background: #1a243b; color: #f4f4f5; border-color: #38bdf8; }
-    .term-tab-pill.active { background: #00b4d8; border-color: #38bdf8; color: #0b0f19; font-weight: 700; box-shadow: 0 0 8px rgba(0, 180, 216, 0.35); }
-    .term-tab-close { opacity: 0.75; margin-left: 2px; border-radius: 3px; padding: 0 2px; }
-    .term-tab-close:hover { opacity: 1; background: rgba(0,0,0,0.2); color: #ef4444; }
-
     .terminal-pane-wrapper { background: #131b2e; border: 1px solid #243252; border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; position: relative; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5); }
-    .terminal-pane-wrapper.active { border-color: #00b4d8; box-shadow: 0 0 0 1px #00b4d8; }
+    .terminal-pane-wrapper.active { border-color: #0d8abc; box-shadow: 0 0 0 1px #0d8abc; }
 
     .pane-header { background: #1a243b; padding: 6px 12px; font-size: 0.78rem; display: flex; justify-content: space-between; align-items: center; user-select: none; border-bottom: 1px solid #243252; z-index: 10; }
     .pane-body { flex: 1; width: 100%; height: 100%; position: relative; padding: 4px; background: #070a12; }
     .empty-screen { flex: 1; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 1.1rem; flex-direction: column; gap: 10px; height: 100%; }
-
-    /* Barra Lateral Direita (Runbooks / Snippets com Categorias) */
-    .runbooks-sidebar {
-      width: 350px;
-      min-width: 350px;
-      background-color: #131b2e;
-      border-left: 1px solid #243252;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.25s ease-in-out;
-      overflow: hidden;
-    }
-    .runbooks-sidebar.collapsed { width: 0px !important; min-width: 0px !important; border-left: none; }
-    .runbooks-inner { width: 350px; height: 100%; display: flex; flex-direction: column; }
-    .runbooks-list { flex: 1; overflow-y: auto; padding: 10px 12px; }
-    .rb-folder-block { margin-bottom: 4px; }
-    .rb-sub-tree { margin-left: 12px; border-left: 1px dashed #243252; padding-left: 8px; display: none; margin-top: 4px; }
-    .rb-sub-tree.open { display: block; }
-    .runbook-card { background: #1a243b; border: 1px solid #243252; border-radius: 8px; padding: 9px; margin-bottom: 8px; }
-    .runbook-card:hover { border-color: #334155; }
-    .cmd-chip { background: #0b0f19; border: 1px solid #243252; color: #cbd5e1; font-family: 'Consolas', 'Courier New', monospace; font-size: 0.74rem; padding: 4px 8px; border-radius: 5px; display: flex; justify-content: space-between; align-items: center; gap: 6px; margin-bottom: 4px; cursor: pointer; transition: all 0.15s; }
-    .cmd-chip:hover { border-color: #00b4d8; color: #fff; background: #111827; }
-    .cmd-chip code { color: #38bdf8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 245px; }
 
     /* Ajuste de Modais para o padrão OmniShell */
     .modal-content { background-color: #131b2e !important; border: 1px solid #243252 !important; color: #f4f4f5 !important; border-radius: 12px !important; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.7); }
@@ -92,6 +58,7 @@
     .form-control, .form-select { background-color: #1a243b !important; border: 1px solid #243252 !important; color: #f4f4f5 !important; }
     .form-control:focus, .form-select:focus { border-color: #00b4d8 !important; box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.25) !important; color: #fff !important; }
 
+/* Forçar alta visibilidade nos rótulos e textos descritivos do modal de Conexão Rápida */
     .modal-body label, 
     .modal-body .form-label, 
     .modal-body span, 
@@ -100,28 +67,32 @@
       font-weight: 500;
     }
 
+    /* Garantir legibilidade perfeita nos placeholders das caixas */
     .form-control::placeholder {
       color: #94a3b8 !important;
       opacity: 1;
     }
    
+/* Forçar alta visibilidade nos textos descritivos e avisos dentro dos modais */
     .modal-body p, 
     .modal-body span, 
     .modal-body label, 
     .modal-body .form-text, 
     .modal-body small {
-      color: #cbd5e1 !important;
+      color: #cbd5e1 !important; /* Cinzento muito claro para contraste perfeito */
     }
 
+    /* Manter o destaque a amarelo/vermelho onde for necessário (ex: avisos de perigo) */
     .modal-body .text-warning {
       color: #fbbf24 !important;
     }
+        
   </style>
 </head>
 <body>
 
   <div class="app-layout">
-    <!-- BARRA LATERAL ESQUERDA: DISPOSITIVOS -->
+    <!-- BARRA LATERAL -->
     <div class="sidebar" id="sidebar">
       <div class="sidebar-header">
         <span><i class="bi bi-person-badge me-1 text-success"></i> {{ username }}</span>
@@ -148,7 +119,6 @@
           </a>
         </div>
       </div>
-
       <div class="tree-container">
         {% macro render_node(node_dict) %}
           {% for key, val in node_dict.items() %}
@@ -183,28 +153,24 @@
       </div>
     </div>
 
-    <!-- ÁREA CENTRAL DE TERMINAIS -->
+    <!-- ÁREA DE TERMINAIS -->
     <div class="terminal-container">
-      <div class="border-bottom px-3 py-1 d-flex justify-content-between align-items-center" style="background-color: #131b2e; border-color: #243252 !important; min-height: 38px;">
+      <div class="bg-dark border-bottom border-secondary px-3 py-1 d-flex justify-content-between align-items-center" style="background-color: #202024 !important; border-color: #27272a !important;">
         <div class="d-flex align-items-center gap-2">
-          <button class="btn btn-outline-light btn-sm py-0 px-2" onclick="toggleSidebar()" title="Recolher / Expandir Lista de Dispositivos">
+          <button class="btn btn-outline-light btn-sm py-0 px-2" onclick="toggleSidebar()" title="Recolher / Expandir Menu Lateral">
             <i class="bi bi-layout-sidebar-inset" id="toggleIcon"></i>
           </button>
           <button class="btn btn-success btn-sm py-0 px-2 fw-semibold" onclick="abrirConexaoRapida()" title="Nova Conexão SSH Direta">
             <i class="bi bi-plus-circle me-1"></i> Conexão Rápida
           </button>
-          <div id="terminalTabsBar" class="terminal-tabs-bar ms-2"></div>
         </div>
 
         <div class="d-flex align-items-center gap-2">
           <div class="btn-group btn-group-sm">
-            <button class="btn btn-outline-secondary py-0 px-2 text-white" id="btnLayout1" onclick="definirLayout(1)" title="Painel Único com Abas (1x1)"><i class="bi bi-square"></i></button>
-            <button class="btn btn-outline-secondary py-0 px-2 text-white" id="btnLayout2" onclick="definirLayout(2)" title="Dividido Lado a Lado (2 Painéis)"><i class="bi bi-layout-split"></i></button>
-            <button class="btn btn-outline-secondary py-0 px-2 text-white" id="btnLayout4" onclick="definirLayout(4)" title="Grelha Quadriculada (4 Painéis)"><i class="bi bi-grid-fill"></i></button>
+            <button class="btn btn-outline-secondary py-0 px-2 text-white" onclick="definirLayout(1)" title="Painel Único (1x1)"><i class="bi bi-square"></i></button>
+            <button class="btn btn-outline-secondary py-0 px-2 text-white" onclick="definirLayout(2)" title="Dividido Lado a Lado (2 Painéis)"><i class="bi bi-layout-split"></i></button>
+            <button class="btn btn-outline-secondary py-0 px-2 text-white" onclick="definirLayout(4)" title="Grelha Quadriculada (4 Painéis)"><i class="bi bi-grid-fill"></i></button>
           </div>
-          <button class="btn btn-outline-info btn-sm py-0 px-2" id="btnToggleRunbooksTop" onclick="toggleRunbooksSidebar()" title="Abrir / Fechar Painel Lateral de Runbooks">
-            <i class="bi bi-journal-code me-1"></i> Runbooks
-          </button>
           <button class="btn btn-outline-danger btn-sm py-0 px-2" onclick="fecharTodosTerminais()" title="Fechar Todos os Terminais">
             <i class="bi bi-x-circle"></i> Fechar Todos
           </button>
@@ -218,52 +184,17 @@
         </div>
       </div>
     </div>
-
-    <!-- BARRA LATERAL DIREITA: RUNBOOKS / SNIPPETS POR CATEGORIAS -->
-    <div class="runbooks-sidebar collapsed" id="runbooksSidebar">
-      <div class="runbooks-inner">
-        <div class="sidebar-header">
-          <span><i class="bi bi-journal-code text-info me-1"></i> Runbooks & Snippets</span>
-          <div class="d-flex gap-1">
-            <button class="btn btn-sm btn-success py-0 px-2" onclick="adicionarGrupoRunbook()" title="Novo Grupo de Comandos">
-              <i class="bi bi-plus-lg"></i>
-            </button>
-            <button class="btn btn-sm btn-outline-secondary py-0 px-2" onclick="toggleRunbooksSidebar()" title="Recolher Painel">
-              <i class="bi bi-x-lg"></i>
-            </button>
-          </div>
-        </div>
-
-        <div class="px-3 pt-2 pb-1">
-          <div class="input-group input-group-sm">
-            <span class="input-group-text bg-dark border-secondary text-muted"><i class="bi bi-search"></i></span>
-            <input type="text" id="runbookSearchInput" class="form-control form-control-sm" placeholder="Filtrar categoria, grupo ou comando..." oninput="filtrarRunbooks()">
-          </div>
-        </div>
-
-        <div id="lista-runbooks-container" class="runbooks-list">
-          <!-- Renderizado dinamicamente em árvore de categorias via JS -->
-        </div>
-
-        <div class="p-2 border-top d-flex justify-content-between align-items-center" style="border-color: #243252 !important; background: #1a243b;">
-          <small class="text-muted" style="font-size: 0.72rem;"><i class="bi bi-cursor-fill text-info me-1"></i>Clique no comando p/ enviar</small>
-          <button type="button" class="btn btn-primary btn-sm py-1 px-3 fw-bold" onclick="salvarRunbooks()">
-            <i class="bi bi-save me-1"></i> Salvar
-          </button>
-        </div>
-      </div>
-    </div>
   </div>
 
   <!-- Caixa Flutuante de Colagem Segura -->
-  <div id="customContextMenu" class="card bg-dark border-secondary shadow-lg p-3" style="display: none; position: fixed; z-index: 9999; width: 320px; top: 30%; left: 50%; transform: translate(-50%, -50%); background-color: #131b2e !important; border-color: #243252 !important;">
+  <div id="customContextMenu" class="card bg-dark border-secondary shadow-lg p-3" style="display: none; position: fixed; z-index: 9999; width: 320px; top: 30%; left: 50%; transform: translate(-50%, -50%); background-color: #18181b !important; border-color: #27272a !important;">
     <div class="d-flex justify-content-between align-items-center mb-2">
       <h6 class="text-warning m-0 small fw-bold"><i class="bi bi-shield-lock me-1"></i> Colagem Segura no Terminal</h6>
       <button type="button" class="btn-close btn-close-white btn-sm" onclick="fecharContextMenu()"></button>
     </div>
     <p class="small mb-2" style="font-size: 0.75rem; color: #a1a1aa;">Cole o seu texto abaixo (Ctrl + V) para verificar antes de enviar:</p>
     <div class="mb-3">
-      <textarea id="pasteInputText" class="form-control text-white border-0" rows="4" placeholder="Cole aqui o texto (Ctrl + V)..." style="font-size: 0.8rem; resize: none;"></textarea>
+      <textarea id="pasteInputText" class="form-control bg-secondary text-white border-0" rows="4" placeholder="Cole aqui o texto (Ctrl + V)..." style="font-size: 0.8rem; resize: none;"></textarea>
     </div>
     <div class="d-flex justify-content-end gap-2">
       <button class="btn btn-sm btn-secondary py-1 px-3" onclick="fecharContextMenu()">Cancelar</button>
@@ -274,17 +205,17 @@
   <!-- MODAL DE SEGURANÇA PARA EXCLUSÃO DE CONTA -->
   <div class="modal fade" id="modalDeleteAccount" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-white border-danger">
+      <div class="modal-content bg-dark text-white border-danger">
         <div class="modal-header border-secondary bg-danger bg-opacity-10">
           <h5 class="modal-title text-danger"><i class="bi bi-exclamation-triangle-fill me-2"></i> Zona de Perigo — Excluir Conta</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <p class="small text-warning mb-2">Esta ação é <strong>irreversível</strong>. Todos os seus dispositivos salvos, runbooks e configurações serão permanentemente apagados.</p>
+          <p class="small text-warning mb-2">Esta ação é <strong>irreversível</strong>. Todos os seus dispositivos salvos e configurações serão permanentemente apagados.</p>
           <p class="small text-muted mb-3">Para confirmar, digite o seu nome de utilizador (<strong id="deleteTargetUserLabel" class="text-info"></strong>) no campo abaixo:</p>
           
           <div class="mb-3">
-            <input type="text" id="deleteConfirmInput" class="form-control text-white" placeholder="Digite o seu nome de utilizador aqui..." oninput="validarTextoExclusao()">
+            <input type="text" id="deleteConfirmInput" class="form-control bg-secondary text-white border-0" placeholder="Digite o seu nome de utilizador aqui..." oninput="validarTextoExclusao()">
           </div>
         </div>
         <div class="modal-footer border-secondary">
@@ -300,26 +231,25 @@
   <!-- MODAL SOBRE / DOCUMENTAÇÃO -->
   <div class="modal fade" id="modalSobre" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content text-white">
-        <div class="modal-header">
+      <div class="modal-content bg-dark text-white border-secondary">
+        <div class="modal-header border-secondary">
           <h5 class="modal-title"><i class="bi bi-info-circle-fill text-info me-2"></i> Documentação & Sobre o OmniShell Gateway</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body" style="max-height: 70vh; overflow-y: auto; font-size: 0.9rem; color: #a1a1aa;">
           
           <h6 class="text-success fw-bold mb-2"><i class="bi bi-terminal-fill me-1"></i> Visão Geral da Ferramenta</h6>
-          <p class="small">O OmniShell Gateway é uma solução portátil e centralizada para gerir conexões SSH remotas diretamente no browser com múltiplos painéis, abas rápidas no modo 1x1, painel lateral de Runbooks/Snippets organizados por categorias e interações avançadas de terminal.</p>
+          <p class="small">O OmniShell Gateway é uma solução portátil e centralizada para gerir conexões SSH remotas diretamente no browser com múltiplos painéis e suporte avançado a interações de terminal.</p>
           
           <hr class="border-secondary my-3">
 
           <h6 class="text-warning fw-bold mb-2"><i class="bi bi-lightbulb me-1"></i> Guia Prático & Atalhos</h6>
           <ul class="ps-3 mb-3" style="line-height: 1.6;">
-            <li><strong class="text-white">Abas no Modo Painel Único (1x1):</strong> Alterne entre sessões abertas usando a barra de abas no topo, o botão de alternância ou os atalhos <kbd class="bg-secondary text-white px-1 rounded">Alt + 1..4</kbd> e <kbd class="bg-secondary text-white px-1 rounded">Alt + Setas</kbd>.</li>
-            <li><strong class="text-white">Runbooks por Categorias:</strong> Clique em <em>Runbooks</em> no topo direito para abrir o painel lateral. Organize seus grupos em pastas usando <code>&gt;</code> ou <code>/</code> (ex: <code>Cisco &gt; Diagnóstico</code>), dispare comandos individuais com 1 clique ou execute toda a sequência com <em>Rodar Tudo</em>.</li>
-            <li><strong class="text-white">Copiar Texto Selecionado:</strong> Selecione com o rato qualquer texto dentro do terminal e clique no botão de cópia rápida (<i class="bi bi-clipboard text-primary"></i>) no topo do painel correspondente.</li>
-            <li><strong class="text-white">Colagem Segura (Botão Direito):</strong> Clique com o botão direito em qualquer terminal para abrir a caixa flutuante de colagem segura.</li>
-            <li><strong class="text-white">Reconectar (Ctrl + R):</strong> Pressione <kbd class="bg-secondary text-white px-1 rounded">Ctrl + R</kbd> dentro do terminal ativo para reiniciar instantaneamente a conexão.</li>
-            <li><strong class="text-white">Exportar Log de Sessão:</strong> Clique no botão de download (<i class="bi bi-download text-success"></i>) no cabeçalho do terminal para guardar o histórico de 50.000 linhas em `.txt`.</li>
+            <li><strong class="text-white">Copiar Texto Selecionado:</strong> Selecione com o rato qualquer texto dentro do terminal e clique no botão de cópia rápida (<i class="bi bi-clipboard text-primary"></i>) no topo do painel correspondente para enviar diretamente para a sua área de transferência.</li>
+            <li><strong class="text-white">Colagem Segura (Botão Direito):</strong> Clique com o botão direito em qualquer terminal para abrir a caixa flutuante de colagem segura. Cole o seu bloco de comandos e verifique antes de enviar.</li>
+            <li><strong class="text-white">Reconectar (Ctrl + R):</strong> Pressione <kbd class="bg-secondary text-white border border-secondary px-1 rounded">Ctrl + R</kbd> no teclado dentro do terminal ativo para reiniciar instantaneamente a conexão.</li>
+            <li><strong class="text-white">Exportar Log de Sessão:</strong> Clique no botão de download (<i class="bi bi-download text-success"></i>) no cabeçalho do terminal para guardar todo o histórico num ficheiro `.txt` com timestamp.</li>
+            <li><strong class="text-white">Histórico Alargado (Buffer):</strong> Cada terminal dispõe de um buffer de 50.000 linhas para análise retroativa profunda de outputs e logs de routers/switches.</li>
           </ul>
 
           <hr class="border-secondary my-3">
@@ -328,8 +258,8 @@
           <p class="small mb-0">As sessões inativas são monitorizadas em tempo real. Caso ultrapasse o tempo limite configurado nas suas definições, a sessão SSH é encerrada automaticamente para proteger o acesso aos ativos corporativos.</p>
 
         </div>
-        <div class="modal-footer">
-          <span class="text-muted small me-auto">OmniShell Gateway v1.2.0</span>
+        <div class="modal-footer border-secondary">
+          <span class="text-muted small me-auto">OmniShell Gateway v1.0</span>
           <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Fechar</button>
         </div>
       </div>
@@ -339,15 +269,15 @@
   <!-- MODAL CONEXÃO RÁPIDA -->
   <div class="modal fade" id="modalQuickConnect" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-white">
-        <div class="modal-header">
+      <div class="modal-content bg-dark text-white border-secondary">
+        <div class="modal-header border-secondary">
           <h5 class="modal-title"><i class="bi bi-lightning-charge-fill text-warning me-2"></i> Nova Conexão SSH Rápida</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
           <div class="mb-3">
             <label class="form-label small text-muted">Endereço IP ou Hostname:</label>
-            <input type="text" class="form-control" id="quickIp" placeholder="ex: 192.168.0.250">
+            <input type="text" class="form-control" id="quickIp" placeholder="ex: 192.168.1.100">
           </div>
           <div class="row mb-3">
             <div class="col-8">
@@ -364,7 +294,7 @@
             <input type="password" class="form-control" id="quickPass" placeholder="••••••••">
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer border-secondary">
           <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
           <button type="button" class="btn btn-success btn-sm" onclick="iniciarConexaoDiretaRapida()"><i class="bi bi-terminal-fill me-1"></i> Ligar Terminal</button>
         </div>
@@ -372,11 +302,11 @@
     </div>
   </div>
 
-  <!-- MODAL PAINEL ADMINISTRATIVO -->
+  <!-- MODAL PAINEL ADMINISTRATIVO (COM ABAS) -->
   <div class="modal fade" id="modalAdmin" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
-      <div class="modal-content text-white">
-        <div class="modal-header">
+      <div class="modal-content bg-dark text-white border-secondary">
+        <div class="modal-header border-secondary">
           <h5 class="modal-title"><i class="bi bi-shield-lock-fill text-danger me-2"></i> Painel de Administração — Gestão Global</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
@@ -384,7 +314,7 @@
           
           <ul class="nav nav-tabs border-secondary mb-3" id="adminTabs" role="tablist">
             <li class="nav-item" role="presentation">
-              <button class="nav-link active bg-secondary text-white border-0 py-1 px-3 me-2" id="users-tab" data-bs-toggle="tab" data-bs-target="#usersTabPane" type="button" style="background-color: #243252 !important;">Contas e Utilizadores</button>
+              <button class="nav-link active bg-secondary text-white border-0 py-1 px-3 me-2" id="users-tab" data-bs-toggle="tab" data-bs-target="#usersTabPane" type="button" style="background-color: #27272a !important;">Contas e Utilizadores</button>
             </li>
             <li class="nav-item" role="presentation">
               <button class="nav-link bg-dark text-white border border-secondary py-1 px-3" id="sessions-tab" data-bs-toggle="tab" data-bs-target="#sessionsTabPane" type="button" onclick="carregarSessoesAtivasAdmin()">Sessões Ativas & Ociosidade</button>
@@ -394,7 +324,7 @@
           <div class="tab-content" id="adminTabContent">
             <!-- ABA 1: UTILIZADORES -->
             <div class="tab-pane fade show active" id="usersTabPane">
-              <div class="mb-3 p-3 border border-secondary rounded" style="background-color: #1a243b !important;">
+              <div class="mb-3 p-3 bg-secondary bg-opacity-10 border border-secondary rounded" style="background-color: #202024 !important;">
                 <h6 class="text-success fw-bold small mb-2"><i class="bi bi-person-plus-fill me-1"></i> Criar Novo Utilizador</h6>
                 <div class="row g-2">
                   <div class="col-md-5">
@@ -410,7 +340,7 @@
               </div>
 
               <div class="table-responsive">
-                <table class="table table-dark table-striped table-bordered align-middle text-white">
+                <table class="table table-dark table-striped table-bordered align-middle text-white" style="background-color: #18181b;">
                   <thead>
                     <tr>
                       <th>Utilizador / Matrícula</th>
@@ -428,7 +358,7 @@
             <div class="tab-pane fade" id="sessionsTabPane">
               <p class="text-muted small mb-2">Monitorize quem está conectado aos terminais SSH no momento e force a desconexão se necessário.</p>
               <div class="table-responsive">
-                <table class="table table-dark table-striped table-bordered align-middle text-white">
+                <table class="table table-dark table-striped table-bordered align-middle text-white" style="background-color: #18181b;">
                   <thead>
                     <tr>
                       <th>Utilizador</th>
@@ -445,7 +375,7 @@
           </div>
 
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer border-secondary">
           <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Fechar</button>
         </div>
       </div>
@@ -455,8 +385,8 @@
   <!-- MODAL ADMIN REDEFINIR SENHA -->
   <div class="modal fade" id="modalAdminResetPass" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-white">
-        <div class="modal-header">
+      <div class="modal-content bg-dark text-white border-secondary">
+        <div class="modal-header border-secondary">
           <h5 class="modal-title"><i class="bi bi-key-fill text-warning me-2"></i> Redefinir Palavra-passe</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
@@ -468,7 +398,7 @@
             <input type="password" id="adminNewPass" class="form-control" placeholder="Digite a nova palavra-passe...">
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer border-secondary">
           <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
           <button type="button" class="btn btn-warning btn-sm" onclick="adminSalvarNovaSenha()">Guardar Palavra-passe</button>
         </div>
@@ -479,8 +409,8 @@
   <!-- MODAL AUTENTICAÇÃO SSH -->
   <div class="modal fade" id="modalAuth" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-white">
-        <div class="modal-header">
+      <div class="modal-content bg-dark text-white border-secondary">
+        <div class="modal-header border-secondary">
           <h5 class="modal-title" id="modalAuthTitle">Conectar via SSH</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
@@ -497,7 +427,7 @@
             <input type="password" class="form-control" id="sshPass" placeholder="••••••••">
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer border-secondary">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
           <button type="button" class="btn btn-primary" onclick="iniciarConexaoSSH()">Conectar</button>
         </div>
@@ -508,13 +438,13 @@
   <!-- MODAL GERENCIADOR DE DISPOSITIVOS E CONFIGURAÇÕES -->
   <div class="modal fade" id="modalManager" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
-      <div class="modal-content text-white">
-        <div class="modal-header">
+      <div class="modal-content bg-dark text-white border-secondary">
+        <div class="modal-header border-secondary">
           <h5 class="modal-title"><i class="bi bi-gear-fill me-2 text-warning"></i> Gerenciar Dispositivos & Preferências</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
-          <div class="mb-4 p-3 border border-secondary rounded" style="background-color: #1a243b !important;">
+          <div class="mb-4 p-3 bg-secondary bg-opacity-10 border border-secondary rounded" style="background-color: #202024 !important;">
             <label class="form-label fw-bold small text-warning"><i class="bi bi-clock-history me-1"></i> Tempo Limite de Ociosidade (Minutos)</label>
             <div class="input-group input-group-sm" style="max-width: 320px;">
               <input type="number" id="idleTimeoutInput" class="form-control" min="1" max="240" value="1">
@@ -537,7 +467,7 @@
             </div>
           </div>
           <div class="table-responsive">
-            <table class="table table-dark table-striped table-bordered align-middle text-white" id="managerTable">
+            <table class="table table-dark table-striped table-bordered align-middle text-white" id="managerTable" style="background-color: #18181b;">
               <thead>
                 <tr>
                   <th>Categoria / Pasta</th>
@@ -552,7 +482,7 @@
             </table>
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer border-secondary">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
           <button type="button" class="btn btn-primary" onclick="salvarDispositivos()"><i class="bi bi-save me-1"></i> Salvar Dispositivos</button>
         </div>
@@ -563,8 +493,8 @@
   <!-- MODAL ALTERAR SENHA -->
   <div class="modal fade" id="modalChangePass" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-white">
-        <div class="modal-header">
+      <div class="modal-content bg-dark text-white border-secondary">
+        <div class="modal-header border-secondary">
           <h5 class="modal-title"><i class="bi bi-key text-warning me-2"></i> Alterar Palavra-passe</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
@@ -579,7 +509,7 @@
             <input type="password" id="newPass" class="form-control" placeholder="Digite a nova palavra-passe...">
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer border-secondary">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
           <button type="button" class="btn btn-primary" onclick="salvarNovaSenha()">Salvar Alteração</button>
         </div>
@@ -610,7 +540,7 @@
     let maxLayoutPanels = 4;
 
     const cliThemes = {
-      classic:   { background: '#070a12', foreground: '#22c55e', cursor: '#22c55e' },
+      classic:   { background: '#09090b', foreground: '#22c55e', cursor: '#22c55e' },
       matrix:    { background: '#0d0208', foreground: '#00ff41', cursor: '#00ff41' },
       ubuntu:    { background: '#300a24', foreground: '#eeeeec', cursor: '#f35d00' },
       solarized: { background: '#002b36', foreground: '#839496', cursor: '#cb4b16' },
@@ -663,31 +593,8 @@
       };
 
       window.addEventListener('mousemove', resetUserActivity);
-      window.addEventListener('keydown', (e) => {
-        resetUserActivity();
-        if (e.altKey && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
-          const ids = Object.keys(terms);
-          if (ids.length > 1) {
-            e.preventDefault();
-            const idx = ids.indexOf(activeTerminalId);
-            const nextIdx = e.key === 'ArrowRight'
-              ? (idx + 1) % ids.length
-              : (idx - 1 + ids.length) % ids.length;
-            ativarTerminalPane(ids[nextIdx]);
-          }
-        } else if (e.altKey && ['1', '2', '3', '4'].includes(e.key)) {
-          const ids = Object.keys(terms);
-          const targetIdx = parseInt(e.key, 10) - 1;
-          if (ids[targetIdx]) {
-            e.preventDefault();
-            ativarTerminalPane(ids[targetIdx]);
-          }
-        }
-      });
+      window.addEventListener('keydown', resetUserActivity);
       window.addEventListener('click', resetUserActivity);
-
-      // Carregar Runbooks / Snippets salvos
-      carregarRunbooks();
     });
 
     setInterval(() => {
@@ -718,337 +625,6 @@
       });
     }, 1000);
 
-    // --- RUNBOOKS & SNIPPETS LOGIC (COM ÁRVORE DE CATEGORIAS IGUAL AO SSH PORTAL) ---
-    let runbooksData = [];
-    let editingRunbooks = new Set();
-    let openRunbookFolders = new Set(['Cisco', 'Linux', 'FortiGate', 'Geral']);
-
-    function escapeHtmlAttr(str) {
-      return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/"/g, '&quot;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-    }
-
-    function toggleRunbooksSidebar() {
-      const rbSidebar = document.getElementById('runbooksSidebar');
-      const btnTop = document.getElementById('btnToggleRunbooksTop');
-      rbSidebar.classList.toggle('collapsed');
-      
-      if (!rbSidebar.classList.contains('collapsed')) {
-        btnTop.classList.replace('btn-outline-info', 'btn-info');
-        btnTop.classList.add('text-dark', 'fw-bold');
-      } else {
-        btnTop.classList.replace('btn-info', 'btn-outline-info');
-        btnTop.classList.remove('text-dark', 'fw-bold');
-      }
-
-      setTimeout(() => {
-        redimensionarTerminais();
-      }, 280);
-    }
-
-    async function carregarRunbooks() {
-      try {
-        const response = await fetch('/api/user/runbooks');
-        const data = await response.json();
-        if (Array.isArray(data) && data.length > 0) {
-          runbooksData = data.map(item => ({
-            categoria: (item.categoria || 'Geral').trim() || 'Geral',
-            titulo: item.titulo || 'Grupo',
-            comandos: Array.isArray(item.comandos) ? item.comandos : []
-          }));
-        } else {
-          // Exemplos pré-configurados organizados por categorias
-          runbooksData = [
-            {
-              categoria: 'Cisco > Diagnóstico',
-              titulo: 'Status de Interfaces & BGP',
-              comandos: ['terminal length 0', 'show ip interface brief', 'show ip bgp summary']
-            },
-            {
-              categoria: 'Cisco > Segurança & Auditoria',
-              titulo: 'Auditoria TACACS+ & AAA',
-              comandos: ['show running-config | section aaa', 'show running-config | section tacacs', 'show tacacs']
-            },
-            {
-              categoria: 'Linux > Sistema',
-              titulo: 'Health Check Rápido',
-              comandos: ['uptime', 'df -h', 'free -m', 'ss -tulnp']
-            },
-            {
-              categoria: 'FortiGate > Diagnóstico',
-              titulo: 'Sessões & Túneis VPN',
-              comandos: ['get system status', 'get system performance status', 'diagnose vpn ike gateway list']
-            }
-          ];
-        }
-        renderizarRunbooks();
-      } catch (err) {
-        console.error('Erro ao carregar runbooks:', err);
-      }
-    }
-
-    function filtrarRunbooks() {
-      renderizarRunbooks();
-    }
-
-    function toggleRunbookFolder(folderPath) {
-      if (openRunbookFolders.has(folderPath)) {
-        openRunbookFolders.delete(folderPath);
-      } else {
-        openRunbookFolders.add(folderPath);
-      }
-      renderizarRunbooks();
-    }
-
-    function construirArvoreRunbooks(listaFiltrada) {
-      const tree = {};
-      listaFiltrada.forEach(({ item, index }) => {
-        const catPath = (item.categoria || 'Geral').trim() || 'Geral';
-        const partes = catPath.replace(/\//g, '>').split('>').map(p => p.trim()).filter(Boolean);
-        let current = tree;
-        partes.forEach(parte => {
-          if (!current[parte]) current[parte] = { __groups__: [] };
-          current = current[parte];
-        });
-        current.__groups__.push({ item, index });
-      });
-      return tree;
-    }
-
-    function renderizarCardRunbook(grupo, index) {
-      const titulo = grupo.titulo || 'Novo Grupo';
-      const categoria = grupo.categoria || 'Geral';
-      const comandos = Array.isArray(grupo.comandos) ? grupo.comandos : [];
-      const isEditing = editingRunbooks.has(index);
-
-      const card = document.createElement('div');
-      card.className = 'runbook-card';
-
-      if (isEditing) {
-        card.innerHTML = `
-          <div class="mb-2">
-            <label class="form-label mb-1" style="font-size: 0.7rem; color: #94a3b8;">Categoria / Pasta (use &gt; para subpastas):</label>
-            <input type="text" class="form-control form-control-sm" id="rb_cat_${index}" value="${escapeHtmlAttr(categoria)}" placeholder="ex: Cisco > Diagnóstico">
-          </div>
-          <div class="d-flex justify-content-between align-items-center mb-2 gap-1">
-            <input type="text" class="form-control form-control-sm" id="rb_title_${index}" value="${escapeHtmlAttr(titulo)}" placeholder="Nome do Grupo">
-            <button type="button" class="btn btn-sm btn-outline-danger py-0 px-2" onclick="removerGrupoRunbook(${index})" title="Excluir Grupo"><i class="bi bi-trash"></i></button>
-          </div>
-          <textarea class="form-control form-control-sm font-monospace" id="rb_cmds_${index}" rows="4" style="font-size: 0.78rem;" placeholder="Um comando por linha..."></textarea>
-          <div class="mt-2 d-flex justify-content-end gap-1">
-            <button type="button" class="btn btn-sm btn-success py-0 px-2" onclick="confirmarEdicaoRunbook(${index})">
-              <i class="bi bi-check-lg me-1"></i> Concluir
-            </button>
-          </div>
-        `;
-        card.querySelector(`#rb_cmds_${index}`).value = comandos.join('\n');
-      } else {
-        const cmdsHtml = comandos.length > 0
-          ? comandos.map((cmd, cIdx) => `
-              <div class="cmd-chip" onclick="executarComandoUnico(${index}, ${cIdx})" title="Clique para enviar: ${escapeHtmlAttr(cmd)}">
-                <code>${escapeHtmlAttr(cmd)}</code>
-                <i class="bi bi-play-fill text-success"></i>
-              </div>
-            `).join('')
-          : '<div class="text-muted small fst-italic">Sem comandos. Clique no lápis para editar.</div>';
-
-        card.innerHTML = `
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <span class="fw-bold text-info text-truncate" style="font-size: 0.81rem;" title="${escapeHtmlAttr(titulo)}">
-              <i class="bi bi-terminal-plus me-1"></i>${escapeHtmlAttr(titulo)}
-            </span>
-            <div class="d-flex gap-1">
-              <button type="button" class="btn btn-sm btn-outline-success py-0 px-2" style="font-size: 0.72rem;" onclick="executarGrupoRunbook(${index})" title="Executar toda a sequência">
-                <i class="bi bi-play-fill"></i> Rodar Tudo
-              </button>
-              <button type="button" class="btn btn-sm btn-outline-secondary py-0 px-1" onclick="alternarEdicaoRunbook(${index})" title="Editar Categoria / Comandos">
-                <i class="bi bi-pencil"></i>
-              </button>
-            </div>
-          </div>
-          <div>${cmdsHtml}</div>
-        `;
-      }
-
-      return card;
-    }
-
-    function renderizarNoArvoreRunbooks(node, parentPath, container, forceOpen) {
-      Object.keys(node).forEach(key => {
-        if (key === '__groups__') return;
-        const currentPath = parentPath ? `${parentPath} > ${key}` : key;
-        const isOpen = forceOpen || openRunbookFolders.has(currentPath) || openRunbookFolders.has(key);
-
-        const folderBlock = document.createElement('div');
-        folderBlock.className = 'rb-folder-block';
-
-        const folderHeader = document.createElement('div');
-        folderHeader.className = 'folder-item';
-        folderHeader.onclick = () => toggleRunbookFolder(currentPath);
-        folderHeader.innerHTML = `
-          <i class="bi ${isOpen ? 'bi-chevron-down' : 'bi-chevron-right'} chevron-icon" style="font-size:0.75rem;"></i>
-          <i class="bi bi-folder-fill text-warning me-1"></i>
-          <span class="text-truncate">${escapeHtmlAttr(key)}</span>
-        `;
-
-        const subTree = document.createElement('div');
-        subTree.className = 'rb-sub-tree' + (isOpen ? ' open' : '');
-
-        renderizarNoArvoreRunbooks(node[key], currentPath, subTree, forceOpen);
-
-        if (Array.isArray(node[key].__groups__)) {
-          node[key].__groups__.forEach(({ item, index }) => {
-            subTree.appendChild(renderizarCardRunbook(item, index));
-          });
-        }
-
-        folderBlock.appendChild(folderHeader);
-        folderBlock.appendChild(subTree);
-        container.appendChild(folderBlock);
-      });
-    }
-
-    function renderizarRunbooks() {
-      const container = document.getElementById('lista-runbooks-container');
-      const searchInput = document.getElementById('runbookSearchInput');
-      const termo = searchInput ? searchInput.value.trim().toLowerCase() : '';
-      container.innerHTML = '';
-
-      if (!runbooksData || runbooksData.length === 0) {
-        container.innerHTML = '<p class="text-muted text-center small my-4">Nenhum runbook criado.<br>Clique em <strong>+</strong> acima para adicionar.</p>';
-        return;
-      }
-
-      const filtrados = [];
-      runbooksData.forEach((item, index) => {
-        const titulo = (item.titulo || '').toLowerCase();
-        const categoria = (item.categoria || 'Geral').toLowerCase();
-        const comandos = Array.isArray(item.comandos) ? item.comandos : [];
-
-        if (!termo || editingRunbooks.has(index) || titulo.includes(termo) || categoria.includes(termo) || comandos.some(c => c.toLowerCase().includes(termo))) {
-          filtrados.push({ item, index });
-        }
-      });
-
-      if (filtrados.length === 0) {
-        container.innerHTML = '<p class="text-muted text-center small my-4">Nenhum resultado encontrado para o filtro.</p>';
-        return;
-      }
-
-      const tree = construirArvoreRunbooks(filtrados);
-      const forceOpen = Boolean(termo) || editingRunbooks.size > 0;
-      renderizarNoArvoreRunbooks(tree, '', container, forceOpen);
-    }
-
-    function adicionarGrupoRunbook() {
-      sincronizarEdicoesAbertas();
-      const novoIndex = runbooksData.length;
-      runbooksData.push({ categoria: 'Geral', titulo: 'Novo Runbook', comandos: [] });
-      editingRunbooks.add(novoIndex);
-      openRunbookFolders.add('Geral');
-      renderizarRunbooks();
-    }
-
-    function alternarEdicaoRunbook(index) {
-      editingRunbooks.add(index);
-      renderizarRunbooks();
-    }
-
-    function confirmarEdicaoRunbook(index) {
-      const catEl = document.getElementById(`rb_cat_${index}`);
-      const titleEl = document.getElementById(`rb_title_${index}`);
-      const cmdsEl = document.getElementById(`rb_cmds_${index}`);
-      if (titleEl && cmdsEl) {
-        const novaCat = (catEl ? catEl.value.trim() : '') || 'Geral';
-        runbooksData[index].categoria = novaCat;
-        runbooksData[index].titulo = titleEl.value.trim() || 'Grupo sem título';
-        runbooksData[index].comandos = cmdsEl.value.split('\n').map(c => c.trim()).filter(c => c.length > 0);
-        openRunbookFolders.add(novaCat);
-      }
-      editingRunbooks.delete(index);
-      renderizarRunbooks();
-    }
-
-    function sincronizarEdicoesAbertas() {
-      editingRunbooks.forEach(index => {
-        const catEl = document.getElementById(`rb_cat_${index}`);
-        const titleEl = document.getElementById(`rb_title_${index}`);
-        const cmdsEl = document.getElementById(`rb_cmds_${index}`);
-        if (titleEl && cmdsEl && runbooksData[index]) {
-          runbooksData[index].categoria = (catEl ? catEl.value.trim() : '') || 'Geral';
-          runbooksData[index].titulo = titleEl.value.trim() || 'Grupo sem título';
-          runbooksData[index].comandos = cmdsEl.value.split('\n').map(c => c.trim()).filter(c => c.length > 0);
-        }
-      });
-    }
-
-    function removerGrupoRunbook(index) {
-      sincronizarEdicoesAbertas();
-      runbooksData.splice(index, 1);
-      editingRunbooks.clear();
-      renderizarRunbooks();
-    }
-
-    async function salvarRunbooks() {
-      sincronizarEdicoesAbertas();
-      editingRunbooks.clear();
-      renderizarRunbooks();
-
-      try {
-        const response = await fetch('/api/user/runbooks', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(runbooksData)
-        });
-        const result = await response.json();
-        if (result.success || result.status === 'success') {
-          alert('Runbooks salvos com sucesso!');
-        } else {
-          alert('Erro ao salvar runbooks.');
-        }
-      } catch (err) {
-        console.error('Erro ao salvar runbooks:', err);
-        alert('Erro de conexão ao salvar runbooks.');
-      }
-    }
-
-    function executarComandoUnico(groupIndex, cmdIndex) {
-      const grupo = runbooksData[groupIndex];
-      if (!grupo || !grupo.comandos[cmdIndex]) return;
-      const cmd = grupo.comandos[cmdIndex];
-
-      if (activeTerminalId && terms[activeTerminalId]) {
-        termActivity[activeTerminalId] = Date.now();
-        socket.emit('ssh_input', { tab_id: activeTerminalId, data: cmd + '\r' });
-        terms[activeTerminalId].term.focus();
-      } else {
-        alert('Conecte-se e foque em um terminal SSH ativo primeiro!');
-      }
-    }
-
-    async function executarGrupoRunbook(index) {
-      const grupo = runbooksData[index];
-      if (!grupo || !grupo.comandos || grupo.comandos.length === 0) {
-        alert('Este grupo não contém comandos para executar.');
-        return;
-      }
-
-      if (activeTerminalId && terms[activeTerminalId]) {
-        terms[activeTerminalId].term.focus();
-        for (let cmd of grupo.comandos) {
-          termActivity[activeTerminalId] = Date.now();
-          socket.emit('ssh_input', { tab_id: activeTerminalId, data: cmd + '\r' });
-          await new Promise(resolve => setTimeout(resolve, 350));
-        }
-      } else {
-        alert('Conecte-se e foque em um terminal SSH ativo primeiro!');
-      }
-    }
-
-    // --- CONTROLO DE SIDEBAR ESQUERDA & TERMINAIS ---
     function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
       const icon = document.getElementById('toggleIcon');
@@ -1074,78 +650,15 @@
       });
     }
 
-    let currentLayout = 1;
-
     function definirLayout(num) {
-      currentLayout = num;
       const grid = document.getElementById('terminalsGridContainer');
-      grid.classList.remove('layout-1', 'layout-2', 'layout-4');
-      if (num === 1) grid.classList.add('layout-1');
+      grid.classList.remove('layout-2', 'layout-4');
       if (num === 2) grid.classList.add('layout-2');
       if (num === 4) grid.classList.add('layout-4');
-
-      [1, 2, 4].forEach(n => {
-        const btn = document.getElementById(`btnLayout${n}`);
-        if (btn) {
-          if (n === num) {
-            btn.classList.remove('btn-outline-secondary', 'text-white');
-            btn.classList.add('btn-info', 'text-dark', 'fw-bold');
-          } else {
-            btn.classList.add('btn-outline-secondary', 'text-white');
-            btn.classList.remove('btn-info', 'text-dark', 'fw-bold');
-          }
-        }
-      });
       
-      renderizarAbasTerminais();
       setTimeout(() => {
         redimensionarTerminais();
-        if (activeTerminalId && terms[activeTerminalId]) {
-          terms[activeTerminalId].term.focus();
-        }
       }, 100);
-    }
-
-    function renderizarAbasTerminais() {
-      const bar = document.getElementById('terminalTabsBar');
-      if (!bar) return;
-      const ids = Object.keys(terms);
-      bar.innerHTML = '';
-
-      if (ids.length === 0) return;
-
-      ids.forEach((id, idx) => {
-        const t = terms[id];
-        const pill = document.createElement('div');
-        pill.className = 'term-tab-pill' + (id === activeTerminalId ? ' active' : '');
-        pill.title = `${t.name} (${t.ip}) — Clique para focar (Alt+${idx + 1})`;
-        pill.onclick = () => ativarTerminalPane(id);
-        pill.innerHTML = `
-          <i class="bi bi-terminal"></i>
-          <span>${idx + 1}. ${escapeHtmlAttr(t.name)}</span>
-          <span class="term-tab-close" onclick="event.stopPropagation(); fecharTerminal('${id}')" title="Fechar aba">&times;</span>
-        `;
-        bar.appendChild(pill);
-      });
-
-      if (ids.length > 1) {
-        const nextBtn = document.createElement('button');
-        nextBtn.type = 'button';
-        nextBtn.className = 'btn btn-outline-info btn-sm py-0 px-2 ms-1';
-        nextBtn.style.fontSize = '0.72rem';
-        nextBtn.title = 'Alternar para o próximo terminal (Alt+Seta)';
-        nextBtn.onclick = alternarProximoTerminal;
-        nextBtn.innerHTML = '<i class="bi bi-arrow-left-right"></i>';
-        bar.appendChild(nextBtn);
-      }
-    }
-
-    function alternarProximoTerminal() {
-      const ids = Object.keys(terms);
-      if (ids.length <= 1) return;
-      const currentIdx = ids.indexOf(activeTerminalId);
-      const nextIdx = (currentIdx + 1) % ids.length;
-      ativarTerminalPane(ids[nextIdx]);
     }
 
     function confirmarColagemInput() {
@@ -1245,7 +758,7 @@
       wrapper.innerHTML = `
         <div class="pane-header">
           <span class="fw-bold text-success text-truncate">
-            <i class="bi bi-terminal-fill me-1"></i> ${escapeHtmlAttr(name)} (${escapeHtmlAttr(ip)})
+            <i class="bi bi-terminal-fill me-1"></i> ${name} (${ip})
             <span class="badge bg-dark border border-secondary text-info ms-2" title="Tempo Total da Sessão" id="timer_${termId}"><i class="bi bi-clock me-1"></i>00:00</span>
             <span class="badge bg-dark border border-secondary text-warning ms-1" title="Tempo de Inatividade (Ociosidade)" id="idle_${termId}"><i class="bi bi-pause-fill me-1"></i>00:00</span>
           </span>
@@ -1276,9 +789,8 @@
       document.getElementById('terminalsGridContainer').appendChild(wrapper);
 
       const total = Object.keys(terms).length + 1;
-      if (total === 1) definirLayout(1);
-      else if (total === 2 && currentLayout !== 1) definirLayout(2);
-      else if (total >= 3 && currentLayout !== 1) definirLayout(4);
+      if (total === 2) definirLayout(2);
+      else if (total >= 3) definirLayout(4);
 
       const termDiv = document.getElementById(`pane_${termId}`);
       const term = new Terminal({
@@ -1321,15 +833,22 @@
         return;
       }
 
+      // Tenta obter o texto selecionado no xterm
       let selection = t.term.getSelection();
 
+      // Fallback: se nenhuma seleção nativa do xterm estiver ativa, copia todo o conteúdo visível ou o buffer recente
       if (!selection || selection.length === 0) {
+        // Se preferir copiar a última linha ou alertar o utilizador:
         alert('Selecione primeiro com o rato o texto que deseja copiar dentro do terminal.');
         return;
       }
 
+      // Método robusto compatível com todos os browsers para escrita no Clipboard
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(selection).catch(err => {
+        navigator.clipboard.writeText(selection).then(() => {
+          console.log('Texto copiado com sucesso.');
+        }).catch(err => {
+          console.warn('Falha na API moderna, tentando fallback...', err);
           copiarComElementoTemporario(selection);
         });
       } else {
@@ -1340,21 +859,30 @@
     function copiarComElementoTemporario(texto) {
       const textarea = document.createElement('textarea');
       textarea.value = texto;
-      textarea.style.position = 'fixed';
+      textarea.style.position = 'fixed';  // Evita scroll para o fundo
       document.body.appendChild(textarea);
       textarea.focus();
       textarea.select();
       try {
-        document.execCommand('copy');
+        const sucesso = document.execCommand('copy');
+        if (sucesso) {
+          console.log('Texto copiado via fallback com sucesso!');
+        } else {
+          alert('Não foi possível copiar o texto automaticamente.');
+        }
       } catch (err) {
         console.error('Erro ao copiar:', err);
+        alert('Erro ao tentar copiar para a área de transferência.');
       }
       document.body.removeChild(textarea);
     }
 
     function exportarLogTerminal(termId) {
       const t = terms[termId];
-      if (!t || !t.term) return;
+      if (!t || !t.term) {
+        alert('Terminal não encontrado.');
+        return;
+      }
 
       const buffer = t.term.buffer.active;
       let linhasTexto = [];
@@ -1390,12 +918,10 @@
         terms[id].wrapperEl.classList.remove('active');
       });
       terms[termId].wrapperEl.classList.add('active');
-      renderizarAbasTerminais();
 
       setTimeout(() => {
-        if (terms[termId] && terms[termId].fitAddon) {
+        if (terms[termId].fitAddon) {
           terms[termId].fitAddon.fit();
-          socket.emit('resize', { tab_id: termId, cols: terms[termId].term.cols, rows: terms[termId].term.rows });
           terms[termId].term.focus();
         }
       }, 50);
@@ -1438,7 +964,6 @@
       const remaining = Object.keys(terms);
       if (remaining.length === 0) {
         activeTerminalId = null;
-        renderizarAbasTerminais();
         document.getElementById('emptyState').style.display = 'flex';
         definirLayout(1);
       } else {

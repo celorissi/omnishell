@@ -1,5 +1,6 @@
 [
     {
+        "categoria": "Linux",
         "titulo": "update",
         "comandos": [
             "sudo apt update",
