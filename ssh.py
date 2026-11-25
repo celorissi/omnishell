@@ -17,9 +17,9 @@ app.config['SECRET_KEY'] = 'nre-ssh-secure-secret-key-2026'
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
 
 USERS_DB = 'users.json'
-USERS_FILE = 'users.json'  # Correção: Declarado explicitamente para a função init_users_file
+USERS_FILE = 'users.json'
 USERS_DIR = 'users'
-ADMIN_USER = 'admin'  # Administrador principal protegido
+ADMIN_USER = 'admin'
 
 if not os.path.exists(USERS_DIR):
     os.makedirs(USERS_DIR)
@@ -32,7 +32,7 @@ def init_users_file():
                 "password": initial_password_hash,
                 "approved": True,
                 "active": True,
-                "must_change_password": True,  # Força a alteração no 1º acesso
+                "must_change_password": True,
                 "idle_timeout": 5
             }
         }
@@ -72,6 +72,12 @@ def obter_caminho_excel(username):
         os.makedirs(user_folder)
     return os.path.join(user_folder, f'devices_{username}.xlsx')
 
+def obter_caminho_runbooks(username):
+    user_folder = os.path.join(USERS_DIR, username)
+    if not os.path.exists(user_folder):
+        os.makedirs(user_folder)
+    return os.path.join(user_folder, f'runbooks_{username}.json')
+
 def carregar_arvore_devices(username):
     excel_path = obter_caminho_excel(username)
     if not os.path.exists(excel_path):
@@ -110,6 +116,55 @@ def carregar_arvore_devices(username):
         })
         
     return tree
+
+# --- ROTAS DE RUNBOOKS / SNIPPETS ---
+
+@app.route('/api/user/runbooks', methods=['GET', 'POST'])
+def api_user_runbooks():
+    if 'username' not in session:
+        return jsonify({'status': 'error', 'message': 'Não autorizado'}), 401
+
+    username = session['username']
+    rb_path = obter_caminho_runbooks(username)
+
+    if request.method == 'POST':
+        try:
+            data = request.get_json()
+            if not isinstance(data, list):
+                return jsonify({'status': 'error', 'message': 'Formato inválido.'}), 400
+            with open(rb_path, 'w', encoding='utf-8') as f:
+                json.dump(data, f, indent=4, ensure_ascii=False)
+            return jsonify({'status': 'success', 'success': True})
+        except Exception as e:
+            return jsonify({'status': 'error', 'message': str(e)}), 500
+
+    if not os.path.exists(rb_path):
+        default_runbooks = [
+            {
+                "categoria": "Cisco IOS",
+                "titulo": "Verificar BGP & Interfaces",
+                "comandos": ["terminal length 0", "show ip bgp summary", "show ip interface brief"]
+            },
+            {
+                "categoria": "FortiGate",
+                "titulo": "Status Geral & Sessões",
+                "comandos": ["get system status", "get system performance status", "diagnose sys session stat"]
+            },
+            {
+                "categoria": "Linux",
+                "titulo": "Diagnóstico Rede & Recursos",
+                "comandos": ["uptime && free -h", "ss -tulnp", "ip -br a"]
+            }
+        ]
+        with open(rb_path, 'w', encoding='utf-8') as f:
+            json.dump(default_runbooks, f, indent=4, ensure_ascii=False)
+        return jsonify(default_runbooks)
+
+    try:
+        with open(rb_path, 'r', encoding='utf-8') as f:
+            return jsonify(json.load(f))
+    except Exception:
+        return jsonify([])
 
 # --- ROTAS DE AUTENTICAÇÃO E GESTÃO ---
 
@@ -765,5 +820,5 @@ def handle_disconnect():
         del user_sessions[k]
 
 if __name__ == '__main__':
-    init_users_file()  # Garante a criação do ficheiro users.json com o admin no arranque
+    init_users_file()
     socketio.run(app, host='0.0.0.0', port=8513, debug=True)

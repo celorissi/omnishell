@@ -1,0 +1,29 @@
+[
+    {
+        "categoria": "Cisco IOS",
+        "titulo": "Verificar BGP & Interfaces",
+        "comandos": [
+            "terminal length 0",
+            "show ip bgp summary",
+            "show ip interface brief"
+        ]
+    },
+    {
+        "categoria": "FortiGate",
+        "titulo": "Status Geral & Sessões",
+        "comandos": [
+            "get system status",
+            "get system performance status",
+            "diagnose sys session stat"
+        ]
+    },
+    {
+        "categoria": "Linux",
+        "titulo": "Diagnóstico Rede & Recursos",
+        "comandos": [
+            "uptime && free -h",
+            "ss -tulnp",
+            "ip -br a"
+        ]
+    }
+]
